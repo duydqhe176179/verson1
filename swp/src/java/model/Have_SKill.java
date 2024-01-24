@@ -9,20 +9,18 @@ package model;
  * @author admin
  */
 public class Have_SKill {
+
     int idMentor;
     int idSkill;
-    int score;
-    int cost;
-   String skillname;
+    String skillname;
 
     public Have_SKill() {
     }
 
-    public Have_SKill(int idMentor, int idSkill, int score, int cost, String skillname) {
+    public Have_SKill(int idMentor, int idSkill, String skillname) {
         this.idMentor = idMentor;
         this.idSkill = idSkill;
-        this.score = score;
-        this.cost = cost;
+
         this.skillname = skillname;
     }
 
@@ -31,19 +29,9 @@ public class Have_SKill {
         this.idSkill = idSkill;
     }
 
-    public Have_SKill(int idMentor, int idSkill, int score, int cost) {
-        this.idMentor = idMentor;
-        this.idSkill = idSkill;
-        this.score = score;
-        this.cost = cost;
-    }
-
     public Have_SKill(int idMentor) {
         this.idMentor = idMentor;
     }
-
-    
-   
 
     public int getIdMentor() {
         return idMentor;
@@ -61,26 +49,12 @@ public class Have_SKill {
         this.idSkill = idSkill;
     }
 
-    public int getScore() {
-        return score;
-    }
-
     @Override
     public String toString() {
-        return "Have_SKill{" + "idMentor=" + idMentor + ", idSkill=" + idSkill + ", score=" + score + ", cost=" + cost + ", skillname=" + skillname + '}';
+        return "Have_SKill{" + "idMentor=" + idMentor + ", idSkill=" + idSkill + ", skillname=" + skillname + '}';
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public int getCost() {
-        return cost;
-    }
-
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
+    
 
     public String getSkillname() {
         return skillname;
@@ -90,6 +64,4 @@ public class Have_SKill {
         this.skillname = skillname;
     }
 
-    
-   
 }

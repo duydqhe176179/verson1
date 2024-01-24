@@ -64,19 +64,31 @@ public class view extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //HttpSession session = request.getSession();
-        //Account a =  (Account) session.getAttribute("account");
-        // if(a.getRole().equals("Mentor")){
-       DAO dao = new DAO();
-        List<Requestt> list = dao.getAllRequesttbyID(1); // replace "int idMentor" with just "idMentor"
-        System.out.println(list);
-        request.setAttribute("listR", list);
-        request.getRequestDispatcher("viewrequest.jsp").forward(request, response);
-        //}  else{
-        //    String mess = "You not allow to access this page";
+        HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("account");
 
-        // }
+        if (account != null && "Mentor".equals(account.getRole())) {
+            int mentorId = account.getId();
+            DAO dao = new DAO();
+            List<Requestt> list = dao.getAllRequesttbyID(mentorId);
+
+            if (!list.isEmpty()) {
+                request.setAttribute("listR", list);
+                request.getRequestDispatcher("viewrequest.jsp").forward(request, response);
+            } else {
+                // If the list is empty, set an appropriate message
+                String errorMessage = "No requests found for this mentor.";
+                request.setAttribute("errorMessage", errorMessage);
+                request.getRequestDispatcher("viewrequest.jsp").forward(request, response);
+            }
+        } else {
+            // If the user is not a mentor, set an appropriate message
+            String errorMessage = "You do not have permission to access this page.";
+            request.setAttribute("errorMessage", errorMessage);
+            request.getRequestDispatcher("viewrequest.jsp").forward(request, response);
+        }
     }
+    
 
     /**
      * Handles the HTTP <code>POST</code> method.

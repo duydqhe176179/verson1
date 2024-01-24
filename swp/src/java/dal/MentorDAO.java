@@ -33,8 +33,9 @@ public class MentorDAO extends DBContext {
 
     public static void main(String[] args) {
         MentorDAO cv = new MentorDAO();
-   //  System.out.println(cv.updateCV(18, "c", "anh12.jpg", "0988722722", "2022-2-2", "Male", "d", "d", "d", "d", "d", "D", "d", "d", new String[]{"1","2"}));
-         System.out.println(cv.addHave_Skill(new Have_SKill(18, 3)));
+        // System.out.println(cv.updateCV(1, "c", "anh12.jpg", "0988722722", "2022-2-2", "Male", "d", "d", "d", "d", "d", "D", "d", "d", new String[]{"1", "2"}));
+      //  System.out.println(cv.addHave_Skill(new Have_SKill(1, 2)));
+        System.out.println(cv.getidhaveskill(1));
 //        
     }
 
@@ -112,14 +113,14 @@ public class MentorDAO extends DBContext {
             stm2 = connection.prepareStatement(sql2);
 
             for (String string : idSkill) {
-                int value_id=Integer.parseInt(string);
+                int value_id = Integer.parseInt(string);
                 stm2.setInt(1, value_id);
-                 stm2.setInt(2, id_Mentor);
-            stm2.executeUpdate();
+                stm2.setInt(2, id_Mentor);
+                stm2.executeUpdate();
 
             }
-              //stm2.executeUpdate();
-           
+            //stm2.executeUpdate();
+
         } catch (SQLException e) {
             System.out.println("loi, ko update dc");
             return false;
@@ -246,7 +247,7 @@ public class MentorDAO extends DBContext {
 
     public List<Have_SKill> getidhaveskill(int IdMentor) {
         try {
-            String strSelect = "select idMentor,idSkill,score,cost,skillName \n"
+            String strSelect = "select idMentor,idSkill,skillName \n"
                     + "from have_skill join skill on have_skill.idSkill = skill.id \n"
                     + "where have_skill.idMentor=?";
 
@@ -256,11 +257,10 @@ public class MentorDAO extends DBContext {
             while (rs.next()) {
                 int idMentor = rs.getInt(1);
                 int idSkill = rs.getInt(2);
-                int score = ((rs.getInt(3)) * 100) / 100;
-                int cost = rs.getInt(4);
-                String skillname = rs.getString(5);
+              
+                String skillname = rs.getString(3);
 
-                Have_SKill a = new Have_SKill(idMentor, idSkill, score, cost, skillname);
+                Have_SKill a = new Have_SKill(idMentor, idSkill,skillname);
                 listhskill.add(a);
 
             }
@@ -335,19 +335,12 @@ public class MentorDAO extends DBContext {
 
     public boolean addHave_Skill(Have_SKill r) {
         try {
-            String strSelect = "  INSERT INTO [dbo].[have_skill]\n"
-                    + "           ([idMentor]\n"
-                    + "           ,[idSkill]\n"
-                    + "           ,[score]\n"
-                    + "           ,[cost])\n"
-                    + "     VALUES\n"
-                    + "           (?,?,?,?)\n"
-                    + "          ";
+            String strSelect = "  INSERT INTO [dbo].[have_skill] ([idMentor], [idSkill])\n"
+                    + "VALUES (?, ?);\n"
+                    + "                           ";
             stm = connection.prepareStatement(strSelect);
             stm.setInt(1, r.getIdMentor());
             stm.setInt(2, r.getIdSkill());
-            stm.setInt(3, r.getScore());
-            stm.setInt(4, r.getCost());
 
             int rowsAffected = stm.executeUpdate();
 

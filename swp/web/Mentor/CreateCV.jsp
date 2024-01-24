@@ -144,7 +144,7 @@
                                         <label class="fieldlabels">Fullname: *</label> 
                                         <input  type="text" name="uname" placeholder="FullName" value="${mentor.fullname}" /> 
                                         <label class="fieldlabels">Sex: *</label> 
-                                        <input  type="text" name="gender" placeholder="Sex" value="${mentor.sex}" /> 
+                                        <input  type="text" name="gender" placeholder="Sex" value="${mentor.sex}" readonly/> 
 
                                         <label   class="fieldlabels">Date: *</label> 
                                         <input  type="date" name="date" placeholder="Date" value="${mentor.dob}"/>
@@ -216,7 +216,7 @@
                             <fieldset>
                                 <div class="form-card">
                                     <button type="submit" class="next action-button" onclick="confirm('Are you sure to update ')"style=" color: white; background: red">Update</button>
-                                    <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                   
                                 </div>
                             </fieldset>
                                         ${mess}

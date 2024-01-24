@@ -11,6 +11,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-....." crossorigin="anonymous" />
         <title>List of Requests</title>
         <style>
             body {
@@ -74,7 +75,12 @@
     <body>
 
         <header>
-            <h1>List of Requests</h1>
+<!--            <h1>List of Requests</h1>-->
+            <a href="home" style="text-decoration: none; color: white; display: flex; align-items: center;">
+                <i class="fa fa-home" style="font-size: 24px; margin-right: 10px;"></i>
+                Home
+            </a>
+            <h1 style="margin-left: auto;">List of Requests</h1>
         </header>
 
         <section>
@@ -91,22 +97,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
-                <c:forEach var="request" items="${listReq}">
-                    <tr>
-                        <td>${request.title}</td>
-                        <td>${request.deadline}</td>
-                        <td>${request.hour}</td>
-                        <td>${request.content}</td>
-                        <td>${request.skill}</td>
-                        <<td>${request.status}</td>
-                        <td class="btn-container">
-                            <button class="update-btn">Update</button>
-                            <button class="delete-btn">Delete</button>
-                        </td>
-                    </tr>
-                </c:forEach>
-                <!-- Add more rows as needed -->
+
+                    <c:forEach var="request" items="${listReq}">
+                        <tr>
+                            <td>${request.title}</td>
+                            <td>${request.deadline}</td>
+                            <td>${request.hour}</td>
+                            <td>${request.content}</td>
+                            <td>${request.skill}</td>
+                            <td>${request.status}</td>
+                            <td class="btn-container">
+                                <button class="update-btn">Update</button>
+                                <button class="delete-btn">Delete</button>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    <!-- Add more rows as needed -->
                 </tbody>
             </table>
         </section>

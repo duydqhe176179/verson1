@@ -163,7 +163,7 @@
                                 <h4 class="line-down"> <i class="fas fa-tv"></i> Skills</h4>
                                 <c:forEach var="e" items="${cf}">
 
-                                    <div>${e.skillname}</div>
+                                    <div>${e.getSkillname()}</div>
 
 
                                 </c:forEach>

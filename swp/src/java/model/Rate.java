@@ -19,6 +19,15 @@ public class Rate {
     public Rate() {
     }
 
+    public Rate(int idMentee, int idMentor, int star, String comment, String time) {
+        this.idMentee = idMentee;
+        this.idMentor = idMentor;
+        this.star = star;
+        this.comment = comment;
+        this.time = time;
+    }
+     
+    
     public Rate(int idRate, int idMentee, int idMentor, int star, String comment, String time) {
         this.idRate = idRate;
         this.idMentee = idMentee;

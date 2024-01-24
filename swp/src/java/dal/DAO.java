@@ -13,7 +13,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
+import model.Mentorr;
 import model.Rate;
+
 import model.Requestt;
 import model.Skill;
 
@@ -260,6 +262,25 @@ public class DAO extends DBContext {
             return false;
         }
     }
+    List<Mentorr> listm = new ArrayList<>();
+
+    public List<Mentorr> getAllMentor() {
+        String sql = "SELECT idMentor, fullname FROM mentor";
+        try ( PreparedStatement stm = connection.prepareStatement(sql);  ResultSet rs = stm.executeQuery()) {
+
+            while (rs.next()) {
+                Mentorr mentorr = new Mentorr(
+                        rs.getInt("idMentor"),
+                        rs.getString("fullname")
+                );
+                listm.add(mentorr);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error when selecting mentors: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return listm;
+    }
 
     public boolean insertr(Rate r) {
         try {
@@ -268,12 +289,12 @@ public class DAO extends DBContext {
                     + "           ,[idMentor]\n"
                     + "           ,[star]\n"
                     + "           ,[comment]\n"
-                    + "           ,[time])\n"
+                    + "           ,[time])"
                     + "VALUES (?, ?, ?, ?, ?)";
             stm = connection.prepareStatement(sql);
 
-            stm.setInt(1, r.getIdMentor());
-            stm.setInt(2, r.getIdMentee());
+            stm.setInt(1, r.getIdMentee());
+            stm.setInt(2, r.getIdMentor());
             stm.setInt(3, r.getStar());
             stm.setString(4, r.getComment());
             stm.setString(5, r.getTime());
@@ -289,23 +310,23 @@ public class DAO extends DBContext {
             return false;
         }
     }
-    
-    public List<Skill> ListAllSkill () {
-            Connection conn = null;
-            String query = "SELECT * FROM skill";
-            try {
-                conn = new DBContext().connection;
-                stm = conn.prepareStatement(query);
-                rs = stm.executeQuery();
-                while (rs.next()) {                    
-                    listAllSkill.add(new Skill(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
-                }
-            } catch (Exception e) {
-                System.out.println(e);
+
+    public List<Skill> ListAllSkill() {
+        Connection conn = null;
+        String query = "SELECT * FROM skill";
+        try {
+            conn = new DBContext().connection;
+            stm = conn.prepareStatement(query);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                listAllSkill.add(new Skill(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
             }
-            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
         return listAllSkill;
-           
+
     }
 
     public static void main(String[] args) {
